@@ -390,3 +390,11 @@ link-libraries = [
 [target.weapon_stay_big_plugin]
 type = "plugin"
 sources = ["examples/weapon_stay_big_plugin/weapon_stay_big.cpp"]
+
+[target.sdk_create_delegate_plugin]
+type = "plugin"
+sources = ["plugins/sdk_create_delegate/**.cpp"]
+link-libraries = [
+    "lua",
+    "sol2"
+]

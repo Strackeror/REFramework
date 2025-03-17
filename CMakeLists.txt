@@ -13769,3 +13769,44 @@ if(REF_BUILD_FRAMEWORK AND CMAKE_SIZEOF_VOID_P EQUAL 8) # build-framework
 	)
 
 endif()
+# Target: sdk_create_delegate_plugin
+if(REF_BUILD_FRAMEWORK AND CMAKE_SIZEOF_VOID_P EQUAL 8) # build-framework
+	set(sdk_create_delegate_plugin_SOURCES
+		cmake.toml
+		"plugins/sdk_create_delegate/plugin.cpp"
+	)
+
+	add_library(sdk_create_delegate_plugin SHARED)
+
+	target_sources(sdk_create_delegate_plugin PRIVATE ${sdk_create_delegate_plugin_SOURCES})
+	source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${sdk_create_delegate_plugin_SOURCES})
+
+	target_compile_features(sdk_create_delegate_plugin PUBLIC
+		cxx_std_23
+	)
+
+	target_include_directories(sdk_create_delegate_plugin PUBLIC
+		"include/"
+	)
+
+	target_link_libraries(sdk_create_delegate_plugin PUBLIC
+		lua
+		sol2
+	)
+
+	set_target_properties(sdk_create_delegate_plugin PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY_RELEASE
+			"${CMAKE_BINARY_DIR}/bin/${CMKR_TARGET}"
+		RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO
+			"${CMAKE_BINARY_DIR}/bin/${CMKR_TARGET}"
+		LIBRARY_OUTPUT_DIRECTORY_RELEASE
+			"${CMAKE_BINARY_DIR}/lib/${CMKR_TARGET}"
+		LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO
+			"${CMAKE_BINARY_DIR}/lib/${CMKR_TARGET}"
+		ARCHIVE_OUTPUT_DIRECTORY_RELEASE
+			"${CMAKE_BINARY_DIR}/lib/${CMKR_TARGET}"
+		ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO
+			"${CMAKE_BINARY_DIR}/lib/${CMKR_TARGET}"
+	)
+
+endif()
